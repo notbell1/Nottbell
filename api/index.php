@@ -1,17 +1,15 @@
 <?php
+// TAMBAHKAN 3 BARIS INI DI PALING ATAS
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// 1. Load Composer Autoloader
 require __DIR__ . '/../vendor/autoload.php';
-
-// 2. Start Laravel
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// 3. Handle Request
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
-
-// 4. Kirim Response ke Browser
 $response->send();
 $kernel->terminate($request, $response);
