@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,12 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectTo(
-            guests: '/login',
+        // Gunakan fungsi closure untuk redirect agar lebih stabil di production
+        $middleware->redirectGuestsTo(fn () => route('login'));
+        $middleware->redirectUsersTo(fn () => '/admin');
 
-            users: '/admin'
-        );
+        // Tambahkan ini jika kamu mengalami masalah Session/Cookie di Vercel
+        $middleware->validateCsrfTokens(except: [
+            // tambahkan rute yang perlu bypass CSRF jika ada (misal callback API)
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
