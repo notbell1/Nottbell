@@ -20,10 +20,18 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        // 2. Tambahkan logika ini
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
+{
+    // Force HTTPS di Production
+    if (config('app.env') === 'production') {
+        URL::forceScheme('https');
+    }
+
+    // PAKSA Laravel menggunakan folder /tmp untuk cache (Penting untuk Vercel)
+    if (env('VERCEL')) {
+        app()->useStoragePath('/tmp/storage');
+        if (!is_dir('/tmp/storage/framework/views')) {
+            mkdir('/tmp/storage/framework/views', 0755, true);
         }
     }
+}
 }
