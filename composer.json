@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=8.4",
+        "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "mongodb/laravel-mongodb": "^5.5"
@@ -83,6 +83,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "ext-mongodb": "2.1"
         }
     },
     "minimum-stability": "stable",
