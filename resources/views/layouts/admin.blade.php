@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Nottbell</title>
+    <title>Nottbell | Dashboard</title>
+
+    <link rel="icon" type="image/png" href="{{ asset('img/icon.png') }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -18,12 +21,15 @@
 
         <nav class="flex-grow px-4 space-y-2">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 py-3 px-4 rounded-xl {{ request()->is('admin') ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} transition-all">
+                <i class="fa-solid fa-chart-line w-5"></i>
                 <span>Dashboard</span>
             </a>
             <a href="{{ route('admin.projects.index') }}" class="flex items-center gap-3 py-3 px-4 rounded-xl {{ request()->is('admin/projects*') ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} transition-all">
+                <i class="fa-solid fa-briefcase w-5"></i>
                 <span>Projects</span>
             </a>
             <a href="{{ route('admin.news.index') }}" class="flex items-center gap-3 py-3 px-4 rounded-xl {{ request()->is('admin/news*') ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} transition-all">
+                <i class="fa-solid fa-newspaper w-5"></i>
                 <span>News Section</span>
             </a>
         </nav>
@@ -32,6 +38,7 @@
             <form action="{{ route('logout') }}" method="POST" class="mb-4">
                 @csrf
                 <button type="submit" class="w-full text-left text-sm text-red-400 hover:text-red-300 flex items-center gap-2 px-4">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     Logout
                 </button>
             </form>
